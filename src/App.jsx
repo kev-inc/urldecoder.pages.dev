@@ -2,6 +2,18 @@ import { useState } from "react";
 
 function App() {
   const [url, setUrl] = useState("")
+
+  const genEncoded = () => {
+    if (url === genDecoded()) {
+      return encodeURIComponent(url)
+    }
+    return url
+  }
+
+  const genDecoded = () => {
+    return decodeURIComponent(url)
+  }
+
   return (
     <div className='bg-gray-100 h-screen flex flex-col'>
       <div className="text-xl font-semibold p-4 mb-2 border bg-white shadow-sm text-blue-500 text-center">
@@ -19,8 +31,7 @@ function App() {
           <pre className='flex-1'>
             <textarea
               class="block p-2.5 w-full text-xs text-gray-900 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:border h-full"
-              value={encodeURIComponent(url)}
-              onChange={e => setUrl(e.target.value)}
+              value={genEncoded()}
               style={{ resize: 'none' }}
             />
           </pre>
@@ -30,8 +41,7 @@ function App() {
           <pre className='flex-1'>
             <textarea
               class="block p-2.5 w-full text-xs text-gray-900 bg-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:border h-full"
-              value={decodeURIComponent(url)}
-              onChange={e => setUrl(e.target.value)}
+              value={genDecoded()}
               style={{ resize: 'none' }}
             />
           </pre>
